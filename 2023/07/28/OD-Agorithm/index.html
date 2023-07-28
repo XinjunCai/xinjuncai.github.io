@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>OD-Agorithm - XinjunCai</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="XinjunCai">
+    <meta property="og:title" content="OD-Agorithm"/>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>XinjunCai</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/hexo/">hexo</a><a class="category-link" href="/categories/python%E5%B0%8F%E7%BB%93/">python小结</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>OD-Agorithm</h2>
+            <div class="post-meta">
+                <time class="date">2023.07.28</time>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h2><ul>
+<li>参考:<a target="_blank" rel="noopener" href="https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch08_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.md">https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch08_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.md</a></li>
+</ul>
+<h3 id="目标检测算法分类"><a href="#目标检测算法分类" class="headerlink" title="目标检测算法分类"></a>目标检测算法分类</h3><p>基于深度学习的目标检测算法主要分为两类：</p>
+<p>1.Two stage目标检测算法</p>
+<p>​ 先进行区域生成（region proposal，RP）（一个有可能包含待检物体的预选框），再通过卷积神经网络进行样本分类。</p>
+<p>​ 任务：特征提取—&gt;生成RP—&gt;分类&#x2F;定位回归。</p>
+<p>​ 常见的two stage目标检测算法有：R-CNN、SPP-Net、Fast R-CNN、Faster R-CNN和R-FCN等。</p>
+<p>2.One stage目标检测算法</p>
+<p>​ 不用RP，直接在网络中提取特征来预测物体分类和位置。</p>
+<p>​ 任务：特征提取—&gt;分类&#x2F;定位回归。</p>
+<p>​ 常见的one stage目标检测算法有：OverFeat、YOLOv1、YOLOv2、YOLOv3、SSD和RetinaNet等。</p>
+<p><img src="/object-detection.png" alt="object-detection"></p>
+<h3 id="Two-stage目标检测算法"><a href="#Two-stage目标检测算法" class="headerlink" title="Two-stage目标检测算法"></a>Two-stage目标检测算法</h3><h4 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster-RCNN"></a>Faster-RCNN</h4><ul>
+<li>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30621997">https://zhuanlan.zhihu.com/p/30621997</a></li>
+</ul>
+<p>新的候选区域网络（RPN）在生成ROI时效率更高，并且以每幅图像10毫秒的速度运行。</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2023/07/28/TSN-survey/">TSN_survey</a></li>
+                
+                
+                    <li>下一篇: <a href="/2023/07/28/container/">container</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="Hingle" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>Hingle</h4>
+                <p>请在这里设置你的作者信息</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2023/07/28/TSN-survey/">TSN_survey</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/07/28/OD-Agorithm/">OD-Agorithm</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/07/28/container/">container</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/07/28/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/15/python-class-overload/">python中类的继承和方法重写</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/15/logging/">python中的logging</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/TSN/" style="font-size: 10px;">TSN</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/logger/" style="font-size: 10px;">logger</a> <a href="/tags/python-class/" style="font-size: 10px;">python,class</a> <a href="/tags/research/" style="font-size: 10px;">research</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">XinjunCai</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
