@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>tensorRT调研和实践 - XinjunCai</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="XinjunCai">
+    <meta property="og:title" content="tensorRT调研和实践"/>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>XinjunCai</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+            </div>
+        </div>
+        
+            <a target="_blank" rel="noopener" href="http://tns.thss.tsinghua.edu.cn/people.html">关于我</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>tensorRT调研和实践</h2>
+            <div class="post-meta">
+                <time class="date">2020.04.01</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 1214 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h3 id="tensorRT简介"><a href="#tensorRT简介" class="headerlink" title="tensorRT简介"></a>tensorRT简介</h3><p>TensorRT是一个高性能的深度学习推理（Inference）优化器，可以为深度学习应用提供低延迟、高吞吐率的部署推理。TensorRT可用于对超大规模数据中心、嵌入式平台或自动驾驶平台进行推理加速。TensorRT现已能支持TensorFlow、Caffe、Mxnet、Pytorch等几乎所有的深度学习框架，将TensorRT和NVIDIA的GPU结合起来，能在几乎所有的框架中进行快速和高效的部署推理。</p>
+<p>可以认为tensorRT是一个只有前向传播的深度学习框架，这个框架可以将 Caffe，TensorFlow的网络模型解析，然后与tensorRT中对应的层进行一一映射，把其他框架的模型统一全部 转换到tensorRT中，然后在tensorRT中可以针对NVIDIA自家GPU实施优化策略，并进行部署加速。</p>
+<p>目前TensorRT4.0 几乎可以支持所有常用的深度学习框架，对于caffe和TensorFlow来说，tensorRT可以直接解析他们的 网络模型；对于caffe2，pytorch，mxnet，chainer，CNTK等框架则是首先要将模型转为 ONNX 的通用深度学习模型，然后对ONNX模型做解析。而tensorflow和MATLAB已经将TensorRT集成到框架中去了。</p>
+<p>ONNX（Open Neural Network Exchange ）是微软和Facebook携手开发的开放式神经网络交换工具，也就是说不管用什么框架训练，只要转换为ONNX模型，就可以放在其他框架上面去inference。这是一种统一的神经网络模型定义和保存方式，上面提到的除了tensorflow之外的其他框架官方应该都对onnx做了支持，而ONNX自己开发了对tensorflow的支持。从深度学习框架方面来说，这是各大厂商对抗谷歌tensorflow垄断地位的一种有效方式；从研究人员和开发者方面来说，这可以使开发者轻易地在不同机器学习工具之间进行转换，并为项目选择最好的组合方式，加快从研究到生产的速度。</p>
+<p>具体参考<a target="_blank" rel="noopener" href="https://arleyzhang.github.io/articles/7f4b25ce/">tensorRT</a></p>
+<h3 id="将Mxnet转换为ONNK"><a href="#将Mxnet转换为ONNK" class="headerlink" title="将Mxnet转换为ONNK"></a>将Mxnet转换为ONNK</h3><p>参考<a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_cn/dlami/latest/devguide/tutorial-onnx-mxnet-cntk.html">blog1</a></p>
+<h3 id="Mxnet使用tensorRT"><a href="#Mxnet使用tensorRT" class="headerlink" title="Mxnet使用tensorRT"></a>Mxnet使用tensorRT</h3><p>Mxnet官方提供了一个使用tensorRT的包，要求环境是ubuntu16.04,cuda版本是9.0或者9.2</p>
+<p>参考<a target="_blank" rel="noopener" href="https://mxnet.incubator.apache.org/versions/master/tutorials/tensorrt/inference_with_trt.html">blog2</a></p>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install execstack</span><br><span class="line">sudo execstack -c /home/nvidia/env_cxj/local/lib/python2<span class="number">.7</span>/site-packages/mxnet/libmxnet.so</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stat ***.file # 查看文件信息</span><br><span class="line">ls -R | grep ***</span><br></pre></td></tr></table></figure>
+<pre><code class="shell">ldd ***.so
+readelf -d libmxnet.so | grep NEEDED
+locate ***.so
+
+nvidia-machine-learning-repo-ubuntu1604_1.0.0-1_ppc64el.deb
+
+build_ccache_wrappers() &#123;
+    set -ex
+
+    if [ -z $&#123;CC+x&#125; ]; then
+        echo &quot;No \$CC set, defaulting to gcc&quot;;
+        export CC=gcc
+    fi
+     if [ -z $&#123;CXX+x&#125; ]; then
+       echo &quot;No \$CXX set, defaulting to g++&quot;;
+       export CXX=g++
+    fi
+
+    # Recommended by CCache: https://ccache.samba.org/manual.html#_run_modes
+    # Add to the beginning of path to ensure this redirection is picked up instead
+    # of the original ones. Especially CUDA/NVCC appends itself to the beginning of the
+    # path and thus this redirect is ignored. This change fixes this problem
+    # This hacky approach with symbolic links is required because underlying build
+    # systems of our submodules ignore our CMake settings. If they use Makefile,
+    # we can&#39;t influence them at all in general and NVCC also prefers to hardcode their
+    # compiler instead of respecting the settings. Thus, we take this brutal approach
+    # and just redirect everything of this installer has been called.
+    # In future, we could do these links during image build time of the container.
+    # But in the beginning, we&#39;ll make this opt-in. In future, loads of processes like
+    # the scala make step or numpy compilation and other pip package generations
+    # could be heavily sped up by using ccache as well.
+    mkdir -p /tmp/ccache-redirects
+    export PATH=/tmp/ccache-redirects:$PATH
+    CCACHE=`which ccache`
+    ln -sf $CCACHE /tmp/ccache-redirects/gcc
+    ln -sf $CCACHE /tmp/ccache-redirects/gcc-8
+    ln -sf $CCACHE /tmp/ccache-redirects/g++
+    ln -sf $CCACHE /tmp/ccache-redirects/g++-8
+    ln -sf $CCACHE /tmp/ccache-redirects/clang++-3.9
+    ln -sf $CCACHE /tmp/ccache-redirects/clang-3.9
+    ln -sf $CCACHE /tmp/ccache-redirects/clang++-5.0
+    ln -sf $CCACHE /tmp/ccache-redirects/clang-5.0
+    ln -sf $CCACHE /tmp/ccache-redirects/clang++-6.0
+    ln -sf $CCACHE /tmp/ccache-redirects/clang-6.0
+    #Doesn&#39;t work: https://github.com/ccache/ccache/issues/373
+    # ln -sf $CCACHE /tmp/ccache-redirects/nvcc
+    # ln -sf $CCACHE /tmp/ccache-redirects/nvcc
+    # export NVCC=&quot;/tmp/ccache-redirects/nvcc&quot;
+
+    # Uncomment if you would like to debug CCache hit rates.
+    # You can monitor using tail -f ccache-log
+    #export CCACHE_LOGFILE=/work/mxnet/ccache-log
+    #export CCACHE_LOGFILE=/tmp/ccache-log
+    #export CCACHE_DEBUG=1
+&#125;
+</code></pre>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li>
+                
+                
+                    <li>下一篇: <a href="/2020/01/10/container/">container详细调研</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/survey/" rel="tag">survey</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="XinjunCai" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>XinjunCai</h4>
+                <p>PhD candidate at Tsinghua University</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/10/container/">container详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/16/CVPR2018-Mobile-Video-Object-Detection/">CVPR2018_Mobile_Video_Object_Detection</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/paper-note/" style="font-size: 20px;">paper note</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/survey/" style="font-size: 20px;">survey</a> <a href="/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">XinjunCai</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

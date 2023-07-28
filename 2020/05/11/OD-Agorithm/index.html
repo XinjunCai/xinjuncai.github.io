@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>python中类的继承和方法重写 - XinjunCai</title>
+    <title>目标检测算法总结 - XinjunCai</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="XinjunCai">
-    <meta property="og:title" content="python中类的继承和方法重写"/>
+    <meta property="og:title" content="目标检测算法总结"/>
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -49,40 +49,50 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>python中类的继承和方法重写</h2>
+            <h2>目标检测算法总结</h2>
             <div class="post-meta">
-                <time class="date">2019.07.15</time>
+                <time class="date">2020.05.11</time>
             
-                <span class="category"><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span>
+                <span class="category"><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 1474 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 1174 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
-            <h3 id="python中类的继承"><a href="#python中类的继承" class="headerlink" title="python中类的继承"></a>python中类的继承</h3><p>和C++类似，python中同样也有类的继承，继承的方法很简单：比如类A继承类B，B是父类，A是子类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">B</span>):</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<h3 id="方法重写"><a href="#方法重写" class="headerlink" title="方法重写"></a>方法重写</h3><p>继承的目的一般是想重用父类的方法，有些时候子类想提供更多参数，但是又想用父类中其他方法，这个时候只需要重写__init__方法，举个栗子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">B</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">    self.name = <span class="string">&quot;B&quot;</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">print_name</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;My name is:&quot;</span>.<span class="built_in">format</span>(self.name))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>(<span class="title class_ inherited__">B</span>):</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">    B.__init__(self)  <span class="comment"># 还有一种做法是用super方法</span></span><br><span class="line">    <span class="comment"># super(B, self).__init__()</span></span><br><span class="line">    self.name = name</span><br><span class="line"></span><br><span class="line">a = A(<span class="string">&quot;Clare&quot;</span>)</span><br><span class="line">a.print_name()</span><br></pre></td></tr></table></figure>
-<p>A重写了B的__init__方法，同时A的实例可以调用B的print_name方法。</p>
+            <h2 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h2><ul>
+<li>参考:<a target="_blank" rel="noopener" href="https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch08_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.md">https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch08_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E7%AC%AC%E5%85%AB%E7%AB%A0_%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B.md</a></li>
+</ul>
+<h3 id="目标检测算法分类d"><a href="#目标检测算法分类d" class="headerlink" title="目标检测算法分类d"></a>目标检测算法分类d</h3><p>基于深度学习的目标检测算法主要分为两类：</p>
+<p>1.Two stage目标检测算法</p>
+<p>​ 先进行区域生成（region proposal，RP）（一个有可能包含待检物体的预选框），再通过卷积神经网络进行样本分类。</p>
+<p>​ 任务：特征提取—&gt;生成RP—&gt;分类&#x2F;定位回归。</p>
+<p>​ 常见的two stage目标检测算法有：R-CNN、SPP-Net、Fast R-CNN、Faster R-CNN和R-FCN等。</p>
+<p>2.One stage目标检测算法</p>
+<p>​ 不用RP，直接在网络中提取特征来预测物体分类和位置。</p>
+<p>​ 任务：特征提取—&gt;分类&#x2F;定位回归。</p>
+<p>​ 常见的one stage目标检测算法有：OverFeat、YOLOv1、YOLOv2、YOLOv3、SSD和RetinaNet等。</p>
+<p><img src="/object-detection.png" alt="object-detection"></p>
+<h3 id="Two-stage目标检测算法"><a href="#Two-stage目标检测算法" class="headerlink" title="Two-stage目标检测算法"></a>Two-stage目标检测算法</h3><h4 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster-RCNN"></a>Faster-RCNN</h4><ul>
+<li>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30621997">https://zhuanlan.zhihu.com/p/30621997</a></li>
+</ul>
+<p>新的候选区域网络（RPN）在生成ROI时效率更高，并且以每幅图像10毫秒的速度运行。</p>
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2019/12/16/CVPR2018-Mobile-Video-Object-Detection/">CVPR2018_Mobile_Video_Object_Detection</a></li>
+                    <li>上一篇: <a href="/2020/06/08/TSN-survey/">TSN的详细调研</a></li>
                 
                 
-                    <li>下一篇: <a href="/2019/07/15/logging/">python中的logging</a></li>
+                    <li>下一篇: <a href="/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/python/" rel="tag">python</a>
+            <a class="-none-link" href="/tags/Algorithm/" rel="tag">Algorithm</a>
             </section>
         
     
