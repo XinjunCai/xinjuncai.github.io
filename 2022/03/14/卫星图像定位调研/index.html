@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>网络带宽的经典论文 - XinjunCai的笔记小屋</title>
+    <title>卫星图像定位调研 - XinjunCai的笔记小屋</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="XinjunCai的笔记小屋">
-    <meta property="og:title" content="网络带宽的经典论文"/>
+    <meta property="og:title" content="卫星图像定位调研"/>
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -49,9 +49,9 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>网络带宽的经典论文</h2>
+            <h2>卫星图像定位调研</h2>
             <div class="post-meta">
-                <time class="date">2020.04.13</time>
+                <time class="date">2022.03.14</time>
             
                 <span class="category"><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
             
@@ -59,41 +59,97 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 1202 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 502 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
-            <h4 id="网络预测"><a href="#网络预测" class="headerlink" title="网络预测"></a>网络预测</h4><h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><ul>
-<li>wifi网络 | 4G网络</li>
-<li>一跳 | 多跳</li>
-<li>历史带宽信息 | lower-layer信息</li>
-<li>预测方法：经典方法 | 机器学习</li>
+            <h1 id="卫星图像定位调研"><a href="#卫星图像定位调研" class="headerlink" title="卫星图像定位调研"></a>卫星图像定位调研</h1><p>类别: 卫星, 重要</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bpwangxch/article/details/79181432">常见国产卫星参数介绍_太白野老-CSDN博客</a></p>
+<p><img src="/table1.png" alt="Untitled.png"></p>
+<h2 id="卫星图像介绍"><a href="#卫星图像介绍" class="headerlink" title="卫星图像介绍"></a>卫星图像介绍</h2><h3 id="卫星图片的成像原理"><a href="#卫星图片的成像原理" class="headerlink" title="卫星图片的成像原理"></a>卫星图片的成像原理</h3><p>卫星图片的获取是依赖传感器，即成像装置。</p>
+<p>传感器主要有两种：CCD传感器和CMOS传感器。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/257854762">浅谈CCD传感器和CMOS传感器的区别</a></p>
+<p>传感器的性能有四个指标：1. 空间分辨率。2. 时间分辨率。 3. 光谱分辨率。 4. 温度分辨率。</p>
+<p>摄像机有内方位参数和外方位参数</p>
+<ul>
+<li>内方位参数（10个）<ul>
+<li>有效焦距c（会随着被测点与摄像机的距离变化），图像主点坐标（主点偏移），镜头畸变（径向畸变k，切向畸变p，仿射和非正交变形项b等）。</li>
 </ul>
-<h5 id="Model-based-approach-for-available-bandwidth-prediction-in-multi-hop-wireless-networks"><a href="#Model-based-approach-for-available-bandwidth-prediction-in-multi-hop-wireless-networks" class="headerlink" title="Model-based approach for available bandwidth prediction in multi-hop wireless networks"></a>Model-based approach for available bandwidth prediction in multi-hop wireless networks</h5><ul>
-<li>802.11-based | 多跳 | physical+MAC layers | 二分搜索</li>
+</li>
+<li>外方位参数（6个）<ul>
+<li>平移量、旋转角</li>
 </ul>
-<h5 id="LinkForecast-Cellular-Link-Bandwidth-Prediction-in-LTE-Networks"><a href="#LinkForecast-Cellular-Link-Bandwidth-Prediction-in-LTE-Networks" class="headerlink" title="LinkForecast: Cellular Link Bandwidth Prediction in LTE Networks"></a>LinkForecast: Cellular Link Bandwidth Prediction in LTE Networks</h5><ul>
-<li>4G | 多跳 | 历史带宽+低层信息(RSRP, RSRQ, CQI, BLER and handover events) | random forest</li>
+</li>
 </ul>
-<h5 id="Machine-Learning-for-Performance-Prediction-in-Mobile-Cellular-Networks"><a href="#Machine-Learning-for-Performance-Prediction-in-Mobile-Cellular-Networks" class="headerlink" title="Machine Learning for Performance Prediction in Mobile Cellular Networks"></a>Machine Learning for Performance Prediction in Mobile Cellular Networks</h5><ul>
-<li>4G | 多跳 | RSS, C&#x2F;I，data rate | Gaussian process regression，exponential smoothing of time series，random forests</li>
+<p>传感器的种类：</p>
+<ul>
+<li><p>摄影类型</p>
+</li>
+<li><p>扫描成像类型</p>
+<ul>
+<li><p>光学机械扫描系统（optial-mechanial scanning）</p>
+<p>  扫描宽幅大但空间分辨率较低。</p>
+</li>
+<li><p>推扫式扫描系统（push-broom scanning）</p>
+<p>  分辨率比较高，但扫描宽幅比较小。</p>
+</li>
 </ul>
-<h5 id="Real-time-Bandwidth-Prediction-and-Rate-Adaptation-for-Video-Calls-over-Cellular-Networks"><a href="#Real-time-Bandwidth-Prediction-and-Rate-Adaptation-for-Video-Calls-over-Cellular-Networks" class="headerlink" title="Real-time Bandwidth Prediction and Rate Adaptation for Video Calls over Cellular Networks"></a>Real-time Bandwidth Prediction and Rate Adaptation for Video Calls over Cellular Networks</h5><ul>
-<li>4G | 多跳 | 历史带宽 |  Recursive Least Squares(RLS)</li>
+</li>
+<li><p>雷达成像类型</p>
+</li>
+<li><p>非图像类型</p>
+</li>
 </ul>
+<h3 id="卫星图片预处理技术"><a href="#卫星图片预处理技术" class="headerlink" title="卫星图片预处理技术"></a>卫星图片预处理技术</h3><p><strong>图像储存格式</strong></p>
+<ul>
+<li>BSQ 格式即按波段记载数据文件;</li>
+<li>BIL 格式即按照波段顺序交叉排列的遥感数据格式;</li>
+<li>GeoTIFF 格式是一种通用的图像格式。</li>
+</ul>
+<p><strong>几何校准</strong></p>
+<p>几何校准可分为两个过程。</p>
+<ol>
+<li><p>坐标变换</p>
+<ol>
+<li><p>直接法：从原始图像阵列出发,依次计算每个像元在输出图像(校正后图像)中的坐标。</p>
+</li>
+<li><p>间接法：从输出图像(空白图像)阵列出发,依次计算每个像元在原始图像中的位置,然后计算原始图像该位置的像元值,再将计算的像元值赋予输出图像像元。</p>
+</li>
+<li><p>多项式校正</p>
+</li>
+<li><p>地面控制点（GCP）</p>
+<p> ●地面控制点需在图像上有明显的、清晰的识别标志,如道路交叉点、建筑边界、农田界线、飞机场、 城廓线等。<br> ●地面控制点上的地物不随时间而变化,以保证当两幅不同时间的图像或地图几何校正时,可以同时识别出来。<br> ●在没有做过地形校正的图像上选择控制点时,应在同一地形高度上进行。<br> ●地面控制点应当均匀地分布在整幅图像内,且要有一定的数量保证<br> (大于多项式校正模型的未知参数个数,n次多项式控制点的最少数目为(n+1)(n+2)&#x2F;2 )。</p>
+</li>
+</ol>
+</li>
+<li><p>灰度值的重采样</p>
+<ol>
+<li>最近邻法：与谁近，就取谁的灰度值为自己的灰度值。（保持光谱信息）</li>
+<li>双线性内插法：所求像元点水平垂直做两条线，计算交点处的值，最后通过交点处的值计算该点像元的灰度值。</li>
+<li>三次卷积法：用了更多的像元点的灰度值，原理和双线性内插法相似。</li>
+</ol>
+</li>
+</ol>
+<p><strong>图像配准</strong></p>
+<p>为了分析某一场景，我们有时需要把不同时期的、不同传感器的、甚至于不同视角的遥感图像融合在一起处理，因此需要对遥感图像进行配准，将多幅遥感图像进行匹配和叠加。</p>
+<p>图像配准是遥感图像处理中的重要环节，也是进行<strong>多源多时相</strong>数据处理的基础。当前图像配准大多采用手动或者自动寻找同名点，并通过建立一阶或者二阶多项式来拟合变形方程，由于拟合方程是线性方程，因此对于配准影像间的非线性变化效果较差。</p>
+<p><strong>图像融合</strong></p>
+<p>将低分辨率的多光谱影像与高分辨率的单波段影像，重采样生成一幅高分辨率多光谱影像遥感的图像处理技术，使得处理后的影像既有较高的空间分辨率，又具有多光谱特征。</p>
+<h2 id="卫星图像物体定位技术"><a href="#卫星图像物体定位技术" class="headerlink" title="卫星图像物体定位技术"></a>卫星图像物体定位技术</h2><p><a target="_blank" rel="noopener" href="http://www.gtzyyg.com/article/2016/1001-070X/1001-070X-28-4-100.html">国产高分辨率卫星影像几何定位研究</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.gtzyyg.com/article/2013/1001-070X/1001-070X-25-4-64.html">基于RFM的ZY-3卫星影像区域网平差研究</a></p>
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li>
+                    <li>下一篇: <a href="/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/paper-note/" rel="tag">paper note</a>
+            <a class="-none-link" href="/tags/survey/" rel="tag">survey</a>
             </section>
         
     
