@@ -4,11 +4,11 @@
      
     <meta charset="UTF-8">
     <title>TSN的详细调研 - XinjunCai的笔记小屋</title>
-    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="shortcut icon" href="/blog/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+<link rel="stylesheet" href="/blog/static/kico.css">
+<link rel="stylesheet" href="/blog/static/hingle.css">
 
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,15 +33,17 @@
         <input type="text" name="s" placeholder="搜索什么？">
     </form>
     <nav class="head-menu">
-        <a href="/">首页</a>
+        <a href="/blog/">首页</a>
         <div class="has-child">
             <a>分类</a>
             <div class="sub-menu">
-                <a class="category-link" href="/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+                <a class="category-link" href="/blog/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/blog/categories/%E7%BC%96%E7%A8%8B/">编程</a><a class="category-link" href="/blog/categories/%E8%AE%B0%E5%BD%95/">记录</a>
             </div>
         </div>
         
             <a target="_blank" rel="noopener" href="http://tns.thss.tsinghua.edu.cn/people.html">关于我</a>
+        
+            <a href="/blog/blog/">简历</a>
         
     </nav>
 </header>
@@ -53,13 +55,13 @@
             <div class="post-meta">
                 <time class="date">2020.06.08</time>
             
-                <span class="category"><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
+                <span class="category"><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 1146 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 1147 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <h3 id="“TSN-工业互联网”调研"><a href="#“TSN-工业互联网”调研" class="headerlink" title="“TSN+工业互联网”调研"></a>“TSN+工业互联网”调研</h3><h4 id="什么是工业互联网"><a href="#什么是工业互联网" class="headerlink" title="什么是工业互联网"></a>什么是工业互联网</h4><p>官方定义：工业互联网是链接工业全系统、全产业链、全价值链，支撑工业智能化发展的关键基础设施，是新一代信息技术与制造业深度融合所形成的新兴业态和应用模式，是互联网从消费领域向生产领域、从虚拟经济向实体经济拓展的核心载体。</p>
 <h4 id="什么是TSN"><a href="#什么是TSN" class="headerlink" title="什么是TSN"></a>什么是TSN</h4><ol>
@@ -153,7 +155,7 @@
 <h4 id="OPC-UA-TSN"><a href="#OPC-UA-TSN" class="headerlink" title="OPC UA TSN"></a>OPC UA TSN</h4><ul>
 <li><p>OPC UA over TSN在工业互联网中的地位</p>
 <ul>
-<li><img src="/opc-ua.png"></li>
+<li><img src="/blog/opc-ua.png"></li>
 <li>传统的工业以太网架构包含三层：物理层、数据链路层和应用层</li>
 <li>常见的一些实时以太网只是在物理层和数据链路层实现了统一，但是应用层都未改变</li>
 <li>而OPC UA的作用是在应用层实现统一，最终实现异构网络(不同的网络间)的互操作。</li>
@@ -161,13 +163,13 @@
 </li>
 <li><p>为什么是OPC UA</p>
 <ul>
-<li><img src="/why-opc-ua.png"></li>
+<li><img src="/blog/why-opc-ua.png"></li>
 <li>核心竞争力：为不同的行业提供不同的信息模型</li>
 </ul>
 </li>
 <li><p>扩展的OPC UA模型-Pub&#x2F;Sub模型</p>
 <ul>
-<li><img src="/opc-ua-model.png"></li>
+<li><img src="/blog/opc-ua-model.png"></li>
 <li>信息模型的作用<ul>
 <li>使用相同的语义标准和规范，降低IT世界访问OT世界的工程量</li>
 </ul>
@@ -176,7 +178,7 @@
 </li>
 <li><p>工业4.0的OPC UA通信实现</p>
 <ul>
-<li><img src="/opc-ua-implement.png"></li>
+<li><img src="/blog/opc-ua-implement.png"></li>
 </ul>
 </li>
 <li><p>OPC UA如何帮助机器学习进行有效传输</p>
@@ -190,36 +192,36 @@
 <li><p>TSN关键技术</p>
 <ul>
 <li>802.1相关协议<ul>
-<li><img src="/tsn-clock.png"></li>
+<li><img src="/blog/tsn-clock.png"></li>
 </ul>
 </li>
 <li>时钟同步<ul>
-<li><img src="/tsn-time.png"></li>
+<li><img src="/blog/tsn-time.png"></li>
 </ul>
 </li>
 <li>数据调度</li>
 <li>系统配置</li>
 <li>控制循环的通信周期性传输<ul>
-<li><img src="/tsn-transfer.png"></li>
+<li><img src="/blog/tsn-transfer.png"></li>
 </ul>
 </li>
 <li>TSN是一个VLAN</li>
-<li><img src="/802.1Q-queue.png"><ul>
+<li><img src="/blog/802.1Q-queue.png"><ul>
 <li>它如何运行<ul>
 <li>基于信用的整形器<ul>
-<li><img src="/Qav.png" alt="Qav"></li>
+<li><img src="/blog/Qav.png" alt="Qav"></li>
 </ul>
 </li>
 <li>时间感知整形器<ul>
-<li><img src="/Qbv.png" alt="Qbv"></li>
+<li><img src="/blog/Qbv.png" alt="Qbv"></li>
 </ul>
 </li>
 <li>帧抢占<ul>
-<li><img src="/Qbu.png" alt="Qbu"></li>
+<li><img src="/blog/Qbu.png" alt="Qbu"></li>
 </ul>
 </li>
 <li>ATS整形器（异步信息）<ul>
-<li><img src="/ATS.png" alt="ATS"></li>
+<li><img src="/blog/ATS.png" alt="ATS"></li>
 </ul>
 </li>
 </ul>
@@ -227,11 +229,11 @@
 </ul>
 </li>
 <li>TSN网络与用户配置<ul>
-<li><img src="/Qcc.png"></li>
+<li><img src="/blog/Qcc.png"></li>
 </ul>
 </li>
 <li>OPC UA over TSN的整体架构<ul>
-<li><img src="/opc-tsn-arch.png"></li>
+<li><img src="/blog/opc-tsn-arch.png"></li>
 </ul>
 </li>
 </ul>
@@ -258,14 +260,14 @@
 <ul>
 <li>IEEE 1588v1 时间同步原理：</li>
 </ul>
-<p>   <img src="/PTP.png"></p>
+<p>   <img src="/blog/PTP.png"></p>
 <pre><code>T2=Offset + Delay + T1    T4 = T3 - Offset + Delay
 </code></pre>
 <p>  PTP v1协议的同步算法能达到亚微秒级精度，但是依赖于网络节点间链路的对称性。如果不对称的话，需要通过额外的算法计算出往返时延时差。</p>
 <ul>
 <li>IEEE 1588v2 时间同步原理：</li>
 </ul>
-<p>  <img src="/PTP-1588v2.png"></p>
+<p>  <img src="/blog/PTP-1588v2.png"></p>
 <p>  $$Delay &#x3D; \frac{T4-T1-\Delta t}{2}$$</p>
 <ol start="2">
 <li><p>802.1Qat流预留协议（Stream Reservation Protocol, SRP）</p>
@@ -277,16 +279,16 @@
 <p>TSN 交换机将接收到的各种数据流重新赋予不同的优先级，并使数据分类进入不同的转发队列， 其中音视频数据流拥有最高的优先级。 协议使用两个调度算法来避免数据冲突， 分别是： 基于信用值的整形算法（credit-based shaper transmission selection algorithm， 简称 CBS 算法）， 和严格优先级算法。除了音视频数据， 对其他普通数据的调度将按照严格优先级算法， 一旦与音视频数据发生冲突， 则使用 CBS 算法进行调度。</p>
 </li>
 </ol>
-<p>  <img src="/Qav-algorithm.png"></p>
+<p>  <img src="/blog/Qav-algorithm.png"></p>
 <p>  在 CBS 算法中，每个流数据队列被赋予一个有界的信用值C ，当有流数据在队列中等待时，该队列对应的C 值以空闲率（idleslope） 为斜率增长，当C 值在 0 和上界之间时，只要信道没有被占用，流数据就立马被发送； 而当流数据在传输时，信用值将以发送率（sendslope） 为斜率的速度下降。这样就能在可控的时间内保证流数据的传输。进一步解释如下图所示。一个 AVB 帧一旦被其它帧阻塞， 它的信用值将按空闲率（idleslope） 进行递增，到坐标点 b 时，链路空闲，由于 AVB 帧具有最高优先级，因此将被发送，同时信用值将按照发送率(sendslope)递减；如果 AVB 帧传输完毕信用值达到负值，此时信用值又将依据空闲率（idleslope） 递增回到零。利用信用值的上下限(高、低信用值) 可以进一步控制突发度。</p>
-<p>  <img src="/CBS-algorithm.png"></p>
+<p>  <img src="/blog/CBS-algorithm.png"></p>
 <h5 id="TSN一些其他的重要协议"><a href="#TSN一些其他的重要协议" class="headerlink" title="TSN一些其他的重要协议"></a>TSN一些其他的重要协议</h5><ol start="4">
 <li><p>IEEE 802.1Qbv（调度器）</p>
 <p>为了进一步减小由于传输干扰业务而带给时间敏感数据流的时延， 并且防止同一网络中不同时间敏感数据流之间相互干扰， IEEE 802.1Qbv 协议定义了基于时间感知的调度器，该调度器利用门操作来为需要保护的业务创建一个独享的信道。 Qbv 中将每个队列与一个门(gate)进行关联，并通过执行一个门控列表对每个队列的门状态进行变更，以此来实现对预排期业务流的调度.</p>
 <p>门状态共有两种： open 和 closed，只有当队列的门为 open 状态时，队列中的帧才能按照传输选择算法进行传输，否则不能传输，图中的 o 和 C 分别就是 open 和 closed。图 2.3 右侧的门控列表循环执行，也可通过配置进行更改。列表中每一行表示一次门操作，如第一行表示在 T00 时刻，将八个队列的门状态依次置为 oCooCooo；第二行表示在 T01 时刻将队列的门状态依次置为CoCooCCo，以此类推。</p>
 </li>
 </ol>
-<p>  <img src="/Qbv-gate.png"></p>
+<p>  <img src="/blog/Qbv-gate.png"></p>
 <ol start="5">
 <li><p>IEEE 802.1Qbu(抢占机制)</p>
 <p>在 Qbv 门操作的基础上，为了进一步保证实时性数据的传输质量，TSN 使用 IEEE802.1Qbu 协议，使得数据通道在强实时性数据满足一定条件之后被抢占， 此时正在传输的弱实时性数据被打断。被抢占打断的数据可以在强实时性数据传输完成之后继续占用信道进行传输.</p>
@@ -297,7 +299,7 @@
 <p>如图所示，是一种 CQF 实现的方式，这种方法包含两个传输队列和一个循环时间，在偶数循环时间间隔中，队列 1 积累来自交换机接收端口的接收帧（不传输），这时队列 2 传输任何来自先前奇数循环的帧(此时不接收任何帧)，在奇数循环中，队列 2 积累来自交换机接收端口的接收帧（不传输），队列 1 传输来自先前偶数循环的所有帧。选择接收和传输循环时间，对于任何给定的数据流，这样的循环间隔用在交换机端口能够传输所有的时间敏感性业务。</p>
 </li>
 </ol>
-<p>  <img src="/Qcf.png"><br>7. IEEE 802.1 Qci数据流管理与过滤</p>
+<p>  <img src="/blog/Qcf.png"><br>7. IEEE 802.1 Qci数据流管理与过滤</p>
 <p>   IEEE 802.1 Qci 协议定义了针对数据流的管理与过滤功能， 来避免由于部分节点流量过载（可能由于端点或者交换机上的错误） 而扩散到其他节点的问题。其目的是为了缓和错误操作对节点造成的影响，包括侦测网络中其他系统造成的破坏性传输并减轻这种破坏性的影响， 从而改善网络的稳健性。</p>
 <h4 id="TSN产品"><a href="#TSN产品" class="headerlink" title="TSN产品"></a>TSN产品</h4><p>目前，主流的自动化厂商都发布了各自的TSN产品或者测试产品，像B&amp;R（贝加莱）在2017年SPS发布了TSN产品，而SIEMENS在2018年汉诺威展发布了Profinet over TSN的产品，2019年三菱发布了CC-Link IE TSN产品。华为、TTTech、CISCO、MOXA、赫斯曼等厂商也发布了TSN交换机产品。</p>
 <p>目前提供TSN技术开发板的包括XILINX，以及TTTech和Intel共同推出的TSN解决方案、芯片厂商NXP、AD等也推出了TSN的开发与测试芯片及测试板。</p>
@@ -324,8 +326,8 @@
 <li>操作文档详细</li>
 </ul>
 </li>
-<li><img src="/ADI-evaluation-kit.png"> 通过网线将设备加入到TSN网络中</li>
-<li><img src="/tsn-example.png"></li>
+<li><img src="/blog/ADI-evaluation-kit.png"> 通过网线将设备加入到TSN网络中</li>
+<li><img src="/blog/tsn-example.png"></li>
 </ul>
 </li>
 <li><h2 id="TTTech-Intel"><a href="#TTTech-Intel" class="headerlink" title="TTTech+Intel"></a>TTTech+Intel</h2></li>
@@ -340,7 +342,7 @@
 <li>操作文档详细</li>
 </ul>
 </li>
-<li><img src="/NXP-connection-diagram.png"></li>
+<li><img src="/blog/NXP-connection-diagram.png"></li>
 </ul>
 </li>
 </ul>
@@ -353,7 +355,7 @@
 <li><p>Avnet</p>
 <ul>
 <li>贵的离谱（$10000）</li>
-<li><img src="/avnet.png"></li>
+<li><img src="/blog/avnet.png"></li>
 </ul>
 </li>
 </ul>
@@ -373,16 +375,16 @@
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li>
+                    <li>上一篇: <a href="/blog/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li>
                 
                 
-                    <li>下一篇: <a href="/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li>
+                    <li>下一篇: <a href="/blog/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/survey-TSN/" rel="tag">survey, TSN</a>
+            <a class="-none-link" href="/blog/tags/survey-TSN/" rel="tag">survey, TSN</a>
             </section>
         
     
@@ -410,27 +412,27 @@
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/14/%E5%8D%AB%E6%98%9F%E5%9B%BE%E5%83%8F%E5%AE%9A%E4%BD%8D%E8%B0%83%E7%A0%94/">卫星图像定位调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2022/03/14/%E5%8D%AB%E6%98%9F%E5%9B%BE%E5%83%8F%E5%AE%9A%E4%BD%8D%E8%B0%83%E7%A0%94/">卫星图像定位调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/Algorithm-survey/" style="font-size: 10px;">Algorithm,survey</a> <a href="/tags/advise/" style="font-size: 10px;">advise</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/paper-note/" style="font-size: 15px;">paper note</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/survey/" style="font-size: 20px;">survey</a> <a href="/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
+                    <a href="/blog/tags/Algorithm-survey/" style="font-size: 10px;">Algorithm,survey</a> <a href="/blog/tags/advise/" style="font-size: 10px;">advise</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/paper-note/" style="font-size: 15px;">paper note</a> <a href="/blog/tags/python/" style="font-size: 15px;">python</a> <a href="/blog/tags/survey/" style="font-size: 20px;">survey</a> <a href="/blog/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
                 </div>
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">XinjunCai的笔记小屋</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2023 <a href="/blog/">XinjunCai的笔记小屋</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
+<script src="/blog/static/kico.js"></script>
+<script src="/blog/static/hingle.js"></script>
 
 
 <script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>

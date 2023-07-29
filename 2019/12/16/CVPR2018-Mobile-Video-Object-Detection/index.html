@@ -4,11 +4,11 @@
      
     <meta charset="UTF-8">
     <title>CVPR2018_Mobile_Video_Object_Detection - XinjunCai的笔记小屋</title>
-    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="shortcut icon" href="/blog/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+<link rel="stylesheet" href="/blog/static/kico.css">
+<link rel="stylesheet" href="/blog/static/hingle.css">
 
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,15 +33,17 @@
         <input type="text" name="s" placeholder="搜索什么？">
     </form>
     <nav class="head-menu">
-        <a href="/">首页</a>
+        <a href="/blog/">首页</a>
         <div class="has-child">
             <a>分类</a>
             <div class="sub-menu">
-                <a class="category-link" href="/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+                <a class="category-link" href="/blog/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/blog/categories/%E7%BC%96%E7%A8%8B/">编程</a><a class="category-link" href="/blog/categories/%E8%AE%B0%E5%BD%95/">记录</a>
             </div>
         </div>
         
             <a target="_blank" rel="noopener" href="http://tns.thss.tsinghua.edu.cn/people.html">关于我</a>
+        
+            <a href="/blog/blog/">简历</a>
         
     </nav>
 </header>
@@ -53,13 +55,13 @@
             <div class="post-meta">
                 <time class="date">2019.12.16</time>
             
-                <span class="category"><a class="category-link" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
+                <span class="category"><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 1321 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 1322 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <h3 id="Mobile-Video-Object-Detection-with-Temporally-Aware-Feature-Maps"><a href="#Mobile-Video-Object-Detection-with-Temporally-Aware-Feature-Maps" class="headerlink" title="Mobile Video Object Detection with Temporally-Aware Feature Maps"></a>Mobile Video Object Detection with Temporally-Aware Feature Maps</h3><ul>
 <li><p>摘要：</p>
@@ -82,9 +84,9 @@
 </li>
 <li><p>LSTM(Long Short Term Memory)</p>
 <p>LSTM的全称是Long Short Term Memory，顾名思义，它具有记忆长短期信息的能力的神经网络。LSTM提出的动机是为了解决上面我们提到的长期依赖问题。传统的RNN节点输出仅由权值，偏置以及激活函数决定。RNN是一个链式结构，每个时间片使用的是相同的参数。</p>
-<p>而LSTM之所以能够解决RNN的长期依赖问题，是因为LSTM引入了门（gate）机制用于控制特征的流通和损失。对于上面的例子，LSTM可以做到在t9时刻将t2时刻的特征传过来，这样就可以非常有效的判断t9时刻使用单数还是负数了。LSTM是由一系列LSTM单元（LSTM Unit）组成，其链式结构如下图。<br><img src="/LSTM_Unit.jpg" alt="LSTM"></p>
+<p>而LSTM之所以能够解决RNN的长期依赖问题，是因为LSTM引入了门（gate）机制用于控制特征的流通和损失。对于上面的例子，LSTM可以做到在t9时刻将t2时刻的特征传过来，这样就可以非常有效的判断t9时刻使用单数还是负数了。LSTM是由一系列LSTM单元（LSTM Unit）组成，其链式结构如下图。<br><img src="/blog/LSTM_Unit.jpg" alt="LSTM"></p>
 <p>LSTM的核心部分是单元状态（cell state），如下图所示：</p>
-<p><img src="/LSTM_Unit_State.png" alt="LSTM_STATE"></p>
+<p><img src="/blog/LSTM_Unit_State.png" alt="LSTM_STATE"></p>
 <p>其中<br>$$C_t&#x3D;f_t\times C_{t-1}+i_t\times \tilde{C}_t$$</p>
 <p>其中 $f_t$ 叫做遗忘门，表示 $C_{t-1}$ 的哪些特征被用于计算 $C_t$ 。 $f_t$ 是一个向量，向量的每个元素均位于 $[0,1]$ 范围内。通常我们使用 $sigmoid$ 作为激活函数， $sigmoid$ 的输出是一个介于 $[0,1]$ 区间内的值，但是当你观察一个训练好的LSTM时，你会发现门的值绝大多数都非常接近0或者1，其余的值少之又少。其中 $\bigotimes$ 是LSTM最重要的门机制，表示 $f_t$ 和 $C_{t-1}$ 之间的单位乘的关系。<br>$$f_t&#x3D;\sigma(W_f\cdot[h_{t-1},x_t]+b_f)$$</p>
 <p> $\tilde{C}<em>t$ 表示单元状态更新值，由输入数据 $x_t$ 和隐节点 $h</em>{t-1}$ 经由一个神经网络层得到，单元状态更新值的激活函数通常使用 $tanh$ 。 $i_t$ 叫做输入门，同 $f_t$ 一样也是一个元素介于 $[0,1]$ 区间内的向量，同样由 $x_t$ 和 $h_{t-1}$ 经由 $sigmoid$ 激活函数计算而成。<br> $$i_t&#x3D;\sigma(W_i\cdot[h_{t-1},x_t]+b_i)$$<br> $$\tilde{C}<em>t&#x3D;tanh(W_C\cdot[h</em>{t-1},x_t]+b_C)$$</p>
@@ -119,16 +121,16 @@
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2020/01/10/container/">container详细调研</a></li>
+                    <li>上一篇: <a href="/blog/2020/01/10/container/">container详细调研</a></li>
                 
                 
-                    <li>下一篇: <a href="/2019/07/15/python-class-overload/">python中类的继承和方法重写</a></li>
+                    <li>下一篇: <a href="/blog/2019/07/15/python-class-overload/">python中类的继承和方法重写</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/paper-note/" rel="tag">paper note</a>
+            <a class="-none-link" href="/blog/tags/paper-note/" rel="tag">paper note</a>
             </section>
         
     
@@ -156,27 +158,27 @@
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/14/%E5%8D%AB%E6%98%9F%E5%9B%BE%E5%83%8F%E5%AE%9A%E4%BD%8D%E8%B0%83%E7%A0%94/">卫星图像定位调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2022/03/14/%E5%8D%AB%E6%98%9F%E5%9B%BE%E5%83%8F%E5%AE%9A%E4%BD%8D%E8%B0%83%E7%A0%94/">卫星图像定位调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/Algorithm-survey/" style="font-size: 10px;">Algorithm,survey</a> <a href="/tags/advise/" style="font-size: 10px;">advise</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/paper-note/" style="font-size: 15px;">paper note</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/survey/" style="font-size: 20px;">survey</a> <a href="/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
+                    <a href="/blog/tags/Algorithm-survey/" style="font-size: 10px;">Algorithm,survey</a> <a href="/blog/tags/advise/" style="font-size: 10px;">advise</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/paper-note/" style="font-size: 15px;">paper note</a> <a href="/blog/tags/python/" style="font-size: 15px;">python</a> <a href="/blog/tags/survey/" style="font-size: 20px;">survey</a> <a href="/blog/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
                 </div>
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">XinjunCai的笔记小屋</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2023 <a href="/blog/">XinjunCai的笔记小屋</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>
 
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
+<script src="/blog/static/kico.js"></script>
+<script src="/blog/static/hingle.js"></script>
 
 
 <script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
