@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>CVPR2018_Mobile_Video_Object_Detection - XinjunCai的笔记小屋</title>
+    <link rel="shortcut icon" href="/blog/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/blog/static/kico.css">
+<link rel="stylesheet" href="/blog/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="XinjunCai的笔记小屋">
+    <meta property="og:title" content="CVPR2018_Mobile_Video_Object_Detection"/>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>XinjunCai的笔记小屋</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/blog/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/blog/categories/%E6%9D%82%E7%B1%BB/">杂类</a><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a><a class="category-link" href="/blog/categories/%E7%BC%96%E7%A8%8B/">编程</a><a class="category-link" href="/blog/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="https://xinjuncai.github.io/resume">关于我</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>CVPR2018_Mobile_Video_Object_Detection</h2>
+            <div class="post-meta">
+                <time class="date">2019.12.16</time>
+            
+                <span class="category"><a class="category-link" href="/blog/categories/%E7%A7%91%E7%A0%94/">科研</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <blockquote>这篇文章上次修改于 1323 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
+            <h3 id="Mobile-Video-Object-Detection-with-Temporally-Aware-Feature-Maps"><a href="#Mobile-Video-Object-Detection-with-Temporally-Aware-Feature-Maps" class="headerlink" title="Mobile Video Object Detection with Temporally-Aware Feature Maps"></a>Mobile Video Object Detection with Temporally-Aware Feature Maps</h3><ul>
+<li><p>摘要：</p>
+<p>这篇文章提出了一个能在低性能的移动设备或嵌入式设备上运行的实时（CPU上运行，15帧&#x2F;秒）视频物体检测模型。我们的方法将速度快的单帧目标检测器和LSTM层结合，得到一个混合循环卷积结构。此外，我们提出一个高效的Bottleneck-LSTM层，和传统LSTM相比减少了计算量。我们的网络使用Bottleneck-LSTM来实现暂态记忆感知，并以此来改善和传播特征。这个方法在Imagenet VID数据集上表现的又快又好，在一个移动CPU上达到了15FPS的实时推理速度。</p>
+</li>
+<li><p>LSTM简介</p>
+<p>LSTM是循环神经网络（RNN）的一种，经常用来处理时序问题。RNN之所以擅长处理时序数据，是因为它不仅仅将当前时刻t的数据进行输入，还会输入上一个时刻t-1的输出。</p>
+<p>RNN的数学表达式如下所示：</p>
+<p>$$h_t&#x3D;\sigma(x_t\times w_{xt}+h_{t-1}\times w_{ht}+b)$$</p>
+<ul>
+<li><p>长期依赖</p>
+<p>RNN中普遍存在长期依赖（Long Term Dependencies）的问题，长期依赖产生的原因是当神经网络的节点经过许多阶段的计算后，之前比较长的时间片的特征已经被覆盖。比如下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eg1: The cat, which already ate a bunch of food, was full.</span><br><span class="line">  |   |     |      |     |  |   |   |   |     |   |</span><br><span class="line"> t0  t1    t2      t3    t4 t5  t6  t7  t8    t9 t10</span><br><span class="line">eg2: The cats, which already ate a bunch of food, were full.</span><br><span class="line">  |   |      |      |     |  |   |   |   |     |    |</span><br><span class="line"> t0  t1     t2     t3    t4 t5  t6  t7  t8    t9   t10</span><br></pre></td></tr></table></figure>
+<p>我们想预测’full’之前系动词的单复数情况，显然full是取决于第二个单词’cat‘的单复数情况，而非其前面的单词food。根据RNN的结构，随着数据时间片的增加，RNN丧失了学习连接如此远的信息的能力.</p>
+</li>
+<li><p>梯度消失&#x2F;爆炸</p>
+<p>梯度消失和梯度爆炸是困扰RNN模型训练的关键原因之一，产生梯度消失和梯度爆炸是由于RNN的权值矩阵循环相乘导致的，相同函数的多次组合会导致极端的非线性行为。梯度消失和梯度爆炸主要存在RNN中，因为RNN中每个时间片使用相同的权值矩阵。对于一个DNN，虽然也涉及多个矩阵的相乘，但是通过精心设计权值的比例可以避免梯度消失和梯度爆炸的问题。</p>
+<p>处理梯度爆炸可以采用梯度截断的方法。所谓梯度截断是指将梯度值超过阈值 $\theta$ 的梯度手动降到 $\theta$。虽然梯度截断会一定程度上改变梯度的方向，但梯度截断的方向依旧是朝向损失函数减小的方向。</p>
+<p>对比梯度爆炸，梯度消失不能简单的通过类似梯度截断的阈值式方法来解决，因为长期依赖的现象也会产生很小的梯度。</p>
+</li>
+<li><p>LSTM(Long Short Term Memory)</p>
+<p>LSTM的全称是Long Short Term Memory，顾名思义，它具有记忆长短期信息的能力的神经网络。LSTM提出的动机是为了解决上面我们提到的长期依赖问题。传统的RNN节点输出仅由权值，偏置以及激活函数决定。RNN是一个链式结构，每个时间片使用的是相同的参数。</p>
+<p>而LSTM之所以能够解决RNN的长期依赖问题，是因为LSTM引入了门（gate）机制用于控制特征的流通和损失。对于上面的例子，LSTM可以做到在t9时刻将t2时刻的特征传过来，这样就可以非常有效的判断t9时刻使用单数还是负数了。LSTM是由一系列LSTM单元（LSTM Unit）组成，其链式结构如下图。<br><img src="/blog/LSTM_Unit.jpg" alt="LSTM"></p>
+<p>LSTM的核心部分是单元状态（cell state），如下图所示：</p>
+<p><img src="/blog/LSTM_Unit_State.png" alt="LSTM_STATE"></p>
+<p>其中<br>$$C_t&#x3D;f_t\times C_{t-1}+i_t\times \tilde{C}_t$$</p>
+<p>其中 $f_t$ 叫做遗忘门，表示 $C_{t-1}$ 的哪些特征被用于计算 $C_t$ 。 $f_t$ 是一个向量，向量的每个元素均位于 $[0,1]$ 范围内。通常我们使用 $sigmoid$ 作为激活函数， $sigmoid$ 的输出是一个介于 $[0,1]$ 区间内的值，但是当你观察一个训练好的LSTM时，你会发现门的值绝大多数都非常接近0或者1，其余的值少之又少。其中 $\bigotimes$ 是LSTM最重要的门机制，表示 $f_t$ 和 $C_{t-1}$ 之间的单位乘的关系。<br>$$f_t&#x3D;\sigma(W_f\cdot[h_{t-1},x_t]+b_f)$$</p>
+<p> $\tilde{C}<em>t$ 表示单元状态更新值，由输入数据 $x_t$ 和隐节点 $h</em>{t-1}$ 经由一个神经网络层得到，单元状态更新值的激活函数通常使用 $tanh$ 。 $i_t$ 叫做输入门，同 $f_t$ 一样也是一个元素介于 $[0,1]$ 区间内的向量，同样由 $x_t$ 和 $h_{t-1}$ 经由 $sigmoid$ 激活函数计算而成。<br> $$i_t&#x3D;\sigma(W_i\cdot[h_{t-1},x_t]+b_i)$$<br> $$\tilde{C}<em>t&#x3D;tanh(W_C\cdot[h</em>{t-1},x_t]+b_C)$$</p>
+<p> 最后，为了计算预测值 $\hat{y}<em>t$ 和生成下个时间片完整的输入，我们需要计算隐节点的输出 $h_t$<br> $$o_t&#x3D;\sigma(W_o\cdot[h</em>{t-1},x_t]+b_o)$$<br> $$h_t&#x3D;o_t*tanh(C_t)$$</p>
+</li>
+</ul>
+</li>
+<li><p>Depthwise Separable Convolution介绍</p>
+<p>Depthwise(DW)卷积与Pointwise(PW)卷积，合起来被称作Depthwise Separable Convolution，该结构和常规卷积操作类似，可用来提取特征，但相比于常规卷积操作，其参数量和运算成本较低。所以在一些轻量级网络中会碰到这种结构如MobileNet。</p>
+<ul>
+<li><p>Depthwise Convolution</p>
+<p>不同于常规卷积操作，Depthwise Convolution的一个卷积核负责一个通道，一个通道只被一个卷积核卷积。上面所提到的常规卷积每个卷积核是同时操作输入图片的每个通道。</p>
+<p>同样是对于一张5×5像素、三通道彩色输入图片（shape为5×5×3），Depthwise Convolution首先经过第一次卷积运算，不同于上面的常规卷积，DW完全是在二维平面内进行。卷积核的数量与上一层的通道数相同（通道和卷积核一一对应）。所以一个三通道的图像经过运算后生成了3个Feature map(如果有same padding则尺寸与输入层相同为5×5)。</p>
+<p>Depthwise Convolution完成后的Feature map数量与输入层的通道数相同，无法扩展Feature map。而且这种运算对输入层的每个通道独立进行卷积运算，没有有效的利用不同通道在相同空间位置上的feature信息。因此需要Pointwise Convolution来将这些Feature map进行组合生成新的Feature map。</p>
+</li>
+<li><p>Pointwise Convolution</p>
+<p>Pointwise Convolution的运算与常规卷积运算非常相似，它的卷积核的尺寸为 1×1×M，M为上一层的通道数。所以这里的卷积运算会将上一步的map在深度方向上进行加权组合，生成新的Feature map。有几个卷积核就有几个输出Feature map。</p>
+<p>参考链接:<a target="_blank" rel="noopener" href="https://yinguobing.com/separable-convolution/">卷积神经网络中的Separable Convolution</a></p>
+</li>
+</ul>
+</li>
+<li><p>Mobilenet中的multiplier</p>
+<p>为了适应不同模型大小和运行速度的要求，Mobilenet引入了两个系数：</p>
+<ul>
+<li>$\alpha$:Width Multiplier, 得到Thinner Models，对输入和输出的feature map的通道数乘以该系数，让每一层都更轻，得到更瘦的网络，实验证明，这种方式减小网络，比单纯减少网络层数得到更浅的网络，准确率更高。α通常取0.25、0.5、0.75、1（取1即是原始完整的基准网络）.</li>
+<li>$\rho$: Resolution Multiplier，得到Reduced Representation，实际是直接修改输入网络的图像的大小，可以有效减少计算量，通常输入图像大小为128、160、192、224（为224时是原始完整的基准网络）.</li>
+</ul>
+</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/blog/2020/01/10/container/">container详细调研</a></li>
+                
+                
+                    <li>下一篇: <a href="/blog/2019/07/15/python-class-overload/">python中类的继承和方法重写</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/blog/tags/paper-note/" rel="tag">paper note</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://sdn.geekzu.org/avatar/d22eb460ecab37fcd7205e6a3c55c228?s=200&r=X&d=" alt="XinjunCai的笔记小屋" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>XinjunCai的笔记小屋</h4>
+                <p>PhD candidate at Tsinghua University</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2022/03/14/%E5%8D%AB%E6%98%9F%E5%9B%BE%E5%83%8F%E5%AE%9A%E4%BD%8D%E8%B0%83%E7%A0%94/">卫星图像定位调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2021/12/15/how-to-do-research/">薪火相传经验谈</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/06/08/TSN-survey/">TSN的详细调研</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/05/11/OD-Agorithm/">目标检测算法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/13/bandwidth-prediction/">网络带宽的经典论文</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2020/04/01/ddff-plan-7-19/">tensorRT调研和实践</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/blog/tags/Algorithm-survey/" style="font-size: 10px;">Algorithm,survey</a> <a href="/blog/tags/advise/" style="font-size: 10px;">advise</a> <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/paper-note/" style="font-size: 15px;">paper note</a> <a href="/blog/tags/python/" style="font-size: 15px;">python</a> <a href="/blog/tags/survey/" style="font-size: 20px;">survey</a> <a href="/blog/tags/survey-TSN/" style="font-size: 10px;">survey, TSN</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/blog/">XinjunCai的笔记小屋</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/blog/static/kico.js"></script>
+<script src="/blog/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>
