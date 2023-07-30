@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["/resume/css/page.css","c6d917585587141479c625d05823f702"],["/resume/css/style.min.css","16a4cc20ac2ecce2dfd8bc11dcf43592"],["/resume/css/vue-pdf.css","b6bb0be6a2cdd25e22956cbf4dd32595"],["/resume/index.html","0b80fd957b9ca45dc6ad0eb46bc1b875"],["/resume/js/common.js","ae798d30af603c3cbf2fa6549151dd0b"],["/resume/js/css.escape.js","fe4db48c9e3f272a6d12cf1312de889e"],["/resume/js/smooth-scroll.min.js","53a7fcc785e987d5ed08302f36de6653"],["/resume/zh-cn/index.html","2d9881db848b3fae2328d5fe890656b3"]];
+var precacheConfig = [["/resume/css/page.css","a1e6dc97523347efb2dbc6c6d9d97a35"],["/resume/css/style.min.css","16a4cc20ac2ecce2dfd8bc11dcf43592"],["/resume/css/vue-pdf.css","c7c99039f5edbe7c3d7a4f1e3d94a19f"],["/resume/index.html","e149d02c029023f3aed540fe4e006c4d"],["/resume/js/common.js","ae798d30af603c3cbf2fa6549151dd0b"],["/resume/js/css.escape.js","fe4db48c9e3f272a6d12cf1312de889e"],["/resume/js/smooth-scroll.min.js","53a7fcc785e987d5ed08302f36de6653"],["/resume/zh-cn/index.html","2cbe2a9ae102eba8fe1a99380f66645a"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 
